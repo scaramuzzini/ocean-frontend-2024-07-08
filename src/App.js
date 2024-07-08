@@ -20,6 +20,11 @@ function ItemDoCarrinho({nomeDoItem, descricaoDoItem}) {
             () => setQuantidade(quantidade + 1)
             }
       >Adicionar +1</button>
+      <button 
+        onClick={
+            () => setQuantidade(quantidade - 1)
+            }
+      >Diminuir -1</button>
     </>
   )
 }
