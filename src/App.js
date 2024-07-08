@@ -1,8 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 
 function ItemDoCarrinho({nomeDoItem, descricaoDoItem}) {
+  const [quantidade, setQuantidade] = useState(1);
+
   return (
     <>
       <h1>
@@ -11,6 +14,12 @@ function ItemDoCarrinho({nomeDoItem, descricaoDoItem}) {
       <h4>
         Descrição do Item: {descricaoDoItem}
       </h4>
+      <p>Quantidade: {quantidade} </p>
+      <button 
+        onClick={
+            () => setQuantidade(quantidade + 1)
+            }
+      >Adicionar +1</button>
     </>
   )
 }
@@ -41,7 +50,8 @@ function App() {
     <div className="1App">
       <header className="App-header">
         <h1>Meu primeiro projeto react</h1>
-        <ItemDoCarrinho nomeDoItem={item1} />
+        <ItemDoCarrinho nomeDoItem={item1} descricaoDoItem="Panela inox de qualidade."  />
+        <ItemDoCarrinho nomeDoItem={item2} descricaoDoItem="Colher inox sem qualidade."  />
       </header>
       
     </div>
