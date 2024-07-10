@@ -9,21 +9,43 @@ function Quadrado({quadrado, handleClick}) {
 }
 
 function verificarVencedor(quadrados) {
+
     /*
-    AND (E)
-    V V = V 
-    V F = F
-    F V = F
-    F F = F
-    */
+        0 1 2
+        3 4 5
+        6 7 8
+    */ 
+   /*
+       00 01 02
+       10 11 12
+       20 21 22 dp i == j ds i + j == len-1
+   */
 
-    if (quadrados[0] && 
-        quadrados[0] == quadrados[1] &&
-        quadrados[1] == quadrados[2]) { //vencedor da primeira linha
+    const combinacoesVencedoras = [
+        // linhas
+        [0, 1, 2], //linha1
+        [3, 4, 5], //linha2
+        [6, 7, 8], //linha3
 
-            return quadrados[0];
+        //colunas
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+
+        //dp e ds
+        [0, 4, 8],
+        [6, 4, 2]
+    ]
+
+    for (let i=0; i < combinacoesVencedoras.length; i++) {
+        const [p1,p2,p3] = combinacoesVencedoras[i];
+        if (quadrados[p1] && 
+            quadrados[p1] == quadrados[p2] &&
+            quadrados[p2] == quadrados[p3]) { //vencedor da primeira linha
+    
+                return quadrados[p1];
+        }
     }
-
     return null;
 }
 
@@ -32,20 +54,15 @@ function Tabuleiro() {
     const [quadrados,setQuadrados] = useState(Array(9).fill(null));
 
     function handleClickQuadrado(i) { //i == 0
-
-        let vencedor = verificarVencedor(quadrados)
-        if (vencedor) {
-            alert('Vencedor é:'+vencedor);
+        if (verificarVencedor(quadrados) || quadrados[i]) {
+            return;
         }
+        const novosQuadrados = quadrados.slice(); //copia do array
+        novosQuadrados[i] = vezDoX ? 'X' : 'O'; //novosQuadrados[0] = X
+        setQuadrados(novosQuadrados); //atualizar o state
 
-        if (quadrados[i] == null) { // quadrados[0] == null
-            const novosQuadrados = quadrados.slice(); //copia do array
-            novosQuadrados[i] = vezDoX ? 'X' : 'O'; //novosQuadrados[0] = X
-            setQuadrados(novosQuadrados); //atualizar o state
-
-            //final da jogada
-            setVezDoX(!vezDoX);
-        }
+        //final da jogada
+        setVezDoX(!vezDoX);
     }
 
     function reiniciarJogo() {
@@ -53,7 +70,13 @@ function Tabuleiro() {
         setVezDoX(true);
     }
 
-    let mensagem = 'Vez do jogador: ' + (vezDoX ? 'X' : 'O')
+    let vencedor = verificarVencedor(quadrados);
+    let mensagem;
+    if (vencedor) {
+        mensagem = 'Vencedor é: '+vencedor;
+    } else {
+        mensagem = 'Vez do jogador: ' + (vezDoX ? 'X' : 'O');
+    }
 
     return (
         <>
