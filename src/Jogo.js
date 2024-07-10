@@ -13,18 +13,26 @@ function Tabuleiro() {
     const [quadrados,setQuadrados] = useState(Array(9).fill(null));
 
     function handleClickQuadrado(i) {
-        const novosQuadrados = quadrados.slice();
-        novosQuadrados[i] = 'X';
-        setQuadrados(novosQuadrados);
+        if (quadrados[i] == null) {
+            const novosQuadrados = quadrados.slice();
+            novosQuadrados[i] = vezDoX ? 'X' : 'O';
+            setQuadrados(novosQuadrados);
+
+            //final da jogada
+            setVezDoX(!vezDoX);
+        }
     }
 
     function reiniciarJogo() {
         setQuadrados(Array(9).fill(null));
+        setVezDoX(true);
     }
+
+    let mensagem = 'Vez do jogador: ' + (vezDoX ? 'X' : 'O')
 
     return (
         <>
-            <h2>Este é um tabuleiro de jogo da velha</h2>
+            <h2>{mensagem}</h2>
             <button onClick={reiniciarJogo}>Reiniciar jogo</button>
             <div className="linha">
                 <Quadrado quadrado={quadrados[0]} handleClick={() => handleClickQuadrado(0)}/>
