@@ -1,23 +1,27 @@
 import './Jogo.css';
 
+function Quadrado() {
+    return <button className="quadrado">X</button>
+}
+
 function Tabuleiro() {
     return (
         <>
             <h2>Este é um tabuleiro de jogo da velha</h2>
             <div className="linha">
-                <button className="quadrado">X</button>
-                <button className="quadrado">X</button>
-                <button className="quadrado">X</button>
+                <Quadrado />
+                <Quadrado />
+                <Quadrado />
             </div>
             <div className="linha">
-                <button>X</button>
-                <button>X</button>
-                <button>X</button>
+                <Quadrado />
+                <Quadrado />
+                <Quadrado />
             </div>
             <div className="linha">
-                <button>X</button>
-                <button>X</button>
-                <button>X</button>
+                <Quadrado />
+                <Quadrado />
+                <Quadrado />
             </div>
         </>
     )

@@ -7,5 +7,14 @@
     width: 100px;
     height: 100px;
     font-size: 48px;
+    border: none;
 }
 
+/* Bordas internas para as células, exceto a última coluna e linha */
+.linha .quadrado:not(:last-child) {
+    border-right: 1px solid black; 
+}
+  
+.linha:not(:last-child) .quadrado {
+    border-bottom: 1px solid black; 
+}
