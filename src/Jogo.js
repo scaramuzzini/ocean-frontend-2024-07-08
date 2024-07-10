@@ -1,7 +1,20 @@
 import './Jogo.css';
+import { useState } from 'react';
 
 function Quadrado() {
-    return <button className="quadrado">X</button>
+    const [quadrado,setQuadrado] = useState('');
+
+    function handleClick() {
+        if (quadrado == 'X') {
+            setQuadrado('O');
+        } else {
+            setQuadrado('X');
+        }
+    }
+    return <button className="quadrado" 
+                    onClick={handleClick}>
+                        {quadrado}
+            </button>
 }
 
 function Tabuleiro() {

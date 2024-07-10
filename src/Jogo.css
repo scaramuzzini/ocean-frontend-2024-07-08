@@ -10,6 +10,14 @@
     border: none;
 }
 
+.quadrado-vermelho {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    font-size: 48px;
+    border: dashed black;
+}
+
 /* Bordas internas para as células, exceto a última coluna e linha */
 .linha .quadrado:not(:last-child) {
     border-right: 1px solid black; 
