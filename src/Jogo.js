@@ -8,15 +8,40 @@ function Quadrado({quadrado, handleClick}) {
             </button>
 }
 
+function verificarVencedor(quadrados) {
+    /*
+    AND (E)
+    V V = V 
+    V F = F
+    F V = F
+    F F = F
+    */
+
+    if (quadrados[0] && 
+        quadrados[0] == quadrados[1] &&
+        quadrados[1] == quadrados[2]) { //vencedor da primeira linha
+
+            return quadrados[0];
+    }
+
+    return null;
+}
+
 function Tabuleiro() {
     const [vezDoX,setVezDoX] = useState(true);
     const [quadrados,setQuadrados] = useState(Array(9).fill(null));
 
-    function handleClickQuadrado(i) {
-        if (quadrados[i] == null) {
-            const novosQuadrados = quadrados.slice();
-            novosQuadrados[i] = vezDoX ? 'X' : 'O';
-            setQuadrados(novosQuadrados);
+    function handleClickQuadrado(i) { //i == 0
+
+        let vencedor = verificarVencedor(quadrados)
+        if (vencedor) {
+            alert('Vencedor é:'+vencedor);
+        }
+
+        if (quadrados[i] == null) { // quadrados[0] == null
+            const novosQuadrados = quadrados.slice(); //copia do array
+            novosQuadrados[i] = vezDoX ? 'X' : 'O'; //novosQuadrados[0] = X
+            setQuadrados(novosQuadrados); //atualizar o state
 
             //final da jogada
             setVezDoX(!vezDoX);
