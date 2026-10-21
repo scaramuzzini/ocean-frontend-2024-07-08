@@ -46,6 +46,23 @@ function OceanApp() {
   )
 }
 
+function ListaDeProdutos() {
+  const produtos = [
+    { "id": 1, "nome":"Panela", "dsc":"Panela inox de qualidade." },
+    { "id": 2, "nome":"Colher", "dsc":"Colher inox de qualidade."},
+    { "id": 3, "nome":"Faca",  "dsc":"Garfo inox sem qualidade." }
+  ];
+
+  const listItems = produtos.map(p =>
+    <li key={p.id}
+      >
+        {p.nome}
+    </li>
+  );
+
+  return <ul>{listItems}</ul>
+}
+
 function App() {
 
   let item1 = "Panela";
@@ -54,6 +71,8 @@ function App() {
   return (
     <div className="1App">
       <header className="App-header">
+        <ListaDeProdutos />
+
         <h1>Meu primeiro projeto react</h1>
         <ItemDoCarrinho nomeDoItem={item1} descricaoDoItem="Panela inox de qualidade."  />
         <ItemDoCarrinho nomeDoItem={item2} descricaoDoItem="Colher inox sem qualidade."  />
